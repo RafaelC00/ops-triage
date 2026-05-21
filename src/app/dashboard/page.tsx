@@ -30,22 +30,22 @@ export default async function DashboardPage({ searchParams }: { searchParams: Se
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-semibold text-slate-100">Request queue</h1>
-        <p className="mt-1 text-sm text-slate-500">Triage incoming operations requests by priority.</p>
+        <h1 className="text-xl font-semibold text-[var(--text)]">Request queue</h1>
+        <p className="mt-1 text-sm text-[var(--text-muted)]">Triage incoming operations requests by priority.</p>
       </div>
 
       <HealthSummary open={stats.open} inProgress={stats.inProgress} urgent={stats.urgent} unassigned={stats.unassigned} />
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {statCards.map((s) => (
-          <div key={s.label} className="rounded-xl border border-white/10 bg-[#0c0e13] p-4 shadow-sm">
+          <div key={s.label} className="rounded-xl border border-[var(--border)] bg-[var(--panel)] p-4 shadow-sm">
             <div className="flex items-center gap-2">
               <span className={`grid h-7 w-7 place-items-center rounded-lg ${s.tint}`}>
                 <s.icon className="h-4 w-4" />
               </span>
-              <span className="text-sm text-slate-500">{s.label}</span>
+              <span className="text-sm text-[var(--text-muted)]">{s.label}</span>
             </div>
-            <p className="mt-2 text-2xl font-semibold text-slate-100">{s.value}</p>
+            <p className="mt-2 text-2xl font-semibold text-[var(--text)]">{s.value}</p>
           </div>
         ))}
       </div>
@@ -53,17 +53,17 @@ export default async function DashboardPage({ searchParams }: { searchParams: Se
       <Filters />
 
       {requests.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-white/15 bg-[#0c0e13] p-12 text-center">
-          <Inbox className="mx-auto h-8 w-8 text-slate-300" />
-          <p className="mt-3 text-sm text-slate-500">No requests match these filters.</p>
+        <div className="rounded-2xl border border-dashed border-[var(--border)] bg-[var(--panel)] p-12 text-center">
+          <Inbox className="mx-auto h-8 w-8 text-[var(--text-2)]" />
+          <p className="mt-3 text-sm text-[var(--text-muted)]">No requests match these filters.</p>
         </div>
       ) : (
         <>
           {/* Desktop table */}
-          <div className="hidden overflow-hidden rounded-2xl border border-white/10 bg-[#0c0e13] shadow-sm md:block">
+          <div className="hidden overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--panel)] shadow-sm md:block">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-white/10 bg-white/5 text-left text-xs uppercase tracking-wide text-slate-500">
+                <tr className="border-b border-[var(--border)] bg-[var(--surface)] text-left text-xs uppercase tracking-wide text-[var(--text-muted)]">
                   <th className="px-4 py-3 font-medium">Request</th>
                   <th className="px-4 py-3 font-medium">Category</th>
                   <th className="px-4 py-3 font-medium">Priority</th>
@@ -73,22 +73,22 @@ export default async function DashboardPage({ searchParams }: { searchParams: Se
                   <th className="px-4 py-3" />
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-[var(--border)]">
                 {requests.map((r) => (
-                  <tr key={r.id} className="group hover:bg-white/5">
+                  <tr key={r.id} className="group hover:bg-[var(--surface)]">
                     <td className="px-4 py-3">
-                      <Link href={`/dashboard/requests/${r.id}`} className="font-medium text-slate-100 hover:text-cyan-400">
+                      <Link href={`/dashboard/requests/${r.id}`} className="font-medium text-[var(--text)] hover:text-cyan-400">
                         {r.title}
                       </Link>
-                      <div className="text-xs text-slate-400">{r.requester}</div>
+                      <div className="text-xs text-[var(--text-3)]">{r.requester}</div>
                     </td>
                     <td className="px-4 py-3"><CategoryBadge value={r.category} /></td>
                     <td className="px-4 py-3"><PriorityBadge value={r.priority} /></td>
                     <td className="px-4 py-3"><StatusBadge value={r.status} /></td>
-                    <td className="px-4 py-3 text-slate-400">{r.owner?.name ?? <span className="text-slate-400">—</span>}</td>
-                    <td className="px-4 py-3 text-slate-500">{formatDate(r.createdAt)}</td>
+                    <td className="px-4 py-3 text-[var(--text-3)]">{r.owner?.name ?? <span className="text-[var(--text-3)]">—</span>}</td>
+                    <td className="px-4 py-3 text-[var(--text-muted)]">{formatDate(r.createdAt)}</td>
                     <td className="px-4 py-3 text-right">
-                      <Link href={`/dashboard/requests/${r.id}`} className="text-slate-300 group-hover:text-cyan-400">
+                      <Link href={`/dashboard/requests/${r.id}`} className="text-[var(--text-2)] group-hover:text-cyan-400">
                         <ArrowRight className="h-4 w-4" />
                       </Link>
                     </td>
@@ -104,17 +104,17 @@ export default async function DashboardPage({ searchParams }: { searchParams: Se
               <Link
                 key={r.id}
                 href={`/dashboard/requests/${r.id}`}
-                className="block rounded-xl border border-white/10 bg-[#0c0e13] p-4 shadow-sm"
+                className="block rounded-xl border border-[var(--border)] bg-[var(--panel)] p-4 shadow-sm"
               >
                 <div className="flex items-start justify-between gap-3">
-                  <span className="font-medium text-slate-100">{r.title}</span>
+                  <span className="font-medium text-[var(--text)]">{r.title}</span>
                   <PriorityBadge value={r.priority} />
                 </div>
-                <div className="mt-1 text-xs text-slate-400">{r.requester} · {formatDate(r.createdAt)}</div>
+                <div className="mt-1 text-xs text-[var(--text-3)]">{r.requester} · {formatDate(r.createdAt)}</div>
                 <div className="mt-3 flex flex-wrap items-center gap-2">
                   <StatusBadge value={r.status} />
                   <CategoryBadge value={r.category} />
-                  {r.owner?.name && <span className="text-xs text-slate-500">· {r.owner.name}</span>}
+                  {r.owner?.name && <span className="text-xs text-[var(--text-muted)]">· {r.owner.name}</span>}
                 </div>
               </Link>
             ))}

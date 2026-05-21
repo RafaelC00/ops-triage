@@ -64,13 +64,13 @@ export function NewRequestForm() {
 
       <div className="rounded-lg border border-dashed border-cyan-500/20 bg-cyan-500/5 p-3">
         <div className="flex items-center justify-between gap-3">
-          <p className="text-sm text-slate-400">Not sure how to triage it?</p>
+          <p className="text-sm text-[var(--text-3)]">Not sure how to triage it?</p>
           <Button type="button" variant="secondary" size="sm" onClick={suggest} disabled={triaging}>
             <Sparkles className="h-4 w-4 text-cyan-400" />
             {triaging ? "Thinking…" : "Suggest triage"}
           </Button>
         </div>
-        {hint && <p className="mt-2 text-xs text-slate-500">{hint}</p>}
+        {hint && <p className="mt-2 text-xs text-[var(--text-muted)]">{hint}</p>}
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -93,7 +93,7 @@ export function NewRequestForm() {
       </div>
 
       {state.error && (
-        <p className="rounded-lg bg-rose-500/10 px-3 py-2 text-sm text-rose-300 ring-1 ring-inset ring-rose-500/20">{state.error}</p>
+        <p className="rounded-lg bg-rose-500/10 px-3 py-2 text-sm text-rose-700 dark:text-rose-300 ring-1 ring-inset ring-rose-500/20">{state.error}</p>
       )}
 
       <div className="flex justify-end gap-3">

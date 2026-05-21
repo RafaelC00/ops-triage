@@ -217,17 +217,17 @@ export function CommandPalette() {
       aria-label="Command palette"
     >
       <div
-        className="w-full max-w-[560px] mx-4 rounded-2xl border border-white/10 bg-[#0c0e13] shadow-[0_0_60px_rgba(0,0,0,0.7),0_0_24px_rgba(34,211,238,0.08)] overflow-hidden"
+        className="w-full max-w-[560px] mx-4 rounded-2xl border border-[var(--border)] bg-[var(--panel)] shadow-[0_0_60px_rgba(0,0,0,0.7),0_0_24px_rgba(34,211,238,0.08)] overflow-hidden"
         onKeyDown={handleKeyDown}
       >
         {/* Search input */}
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-white/10">
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-[var(--border)]">
           <svg
             width="15"
             height="15"
             viewBox="0 0 15 15"
             fill="none"
-            className="text-slate-500 shrink-0"
+            className="text-[var(--text-muted)] shrink-0"
             aria-hidden="true"
           >
             <path
@@ -241,14 +241,14 @@ export function CommandPalette() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Type a command or search…"
-            className="flex-1 bg-transparent text-slate-200 placeholder:text-slate-500 font-mono text-sm outline-none"
+            className="flex-1 bg-transparent text-[var(--text)] placeholder:text-[var(--text-muted)] font-mono text-sm outline-none"
             autoComplete="off"
             spellCheck={false}
           />
           {query && (
             <button
               onClick={() => setQuery("")}
-              className="text-slate-500 hover:text-slate-300 transition-colors"
+              className="text-[var(--text-muted)] hover:text-[var(--text-2)] transition-colors"
               aria-label="Clear search"
             >
               <X size={14} />
@@ -259,7 +259,7 @@ export function CommandPalette() {
         {/* Results list */}
         <div className="max-h-[340px] overflow-y-auto">
           {filtered.length === 0 ? (
-            <p className="px-4 py-8 text-center font-mono text-sm text-slate-500">
+            <p className="px-4 py-8 text-center font-mono text-sm text-[var(--text-muted)]">
               No commands match &ldquo;{query}&rdquo;
             </p>
           ) : (
@@ -267,7 +267,7 @@ export function CommandPalette() {
               {groups.map((group) => (
                 <li key={group} role="presentation">
                   {/* Group header */}
-                  <p className="px-4 pt-3 pb-1 font-mono text-[10px] uppercase tracking-widest text-slate-500">
+                  <p className="px-4 pt-3 pb-1 font-mono text-[10px] uppercase tracking-widest text-[var(--text-muted)]">
                     {group}
                   </p>
                   {/* Commands in this group */}
@@ -285,12 +285,12 @@ export function CommandPalette() {
                           onClick={() => run(cmd)}
                           className={`flex items-center gap-3 px-4 py-2.5 cursor-pointer transition-colors ${
                             isHighlighted
-                              ? "bg-white/[0.06] text-[#22d3ee]"
-                              : "text-slate-300 hover:bg-white/[0.04]"
+                              ? "bg-[var(--surface)] text-[#22d3ee]"
+                              : "text-[var(--text-2)] hover:bg-[var(--surface)]"
                           }`}
                         >
                           <span
-                            className={`shrink-0 ${isHighlighted ? "text-[#22d3ee]" : "text-slate-500"}`}
+                            className={`shrink-0 ${isHighlighted ? "text-[#22d3ee]" : "text-[var(--text-muted)]"}`}
                           >
                             {cmd.icon}
                           </span>
@@ -298,7 +298,7 @@ export function CommandPalette() {
                             {cmd.label}
                           </span>
                           {isHighlighted && (
-                            <span className="font-mono text-[10px] text-slate-500">
+                            <span className="font-mono text-[10px] text-[var(--text-muted)]">
                               ↵
                             </span>
                           )}
@@ -312,24 +312,24 @@ export function CommandPalette() {
         </div>
 
         {/* Footer keycap hints */}
-        <div className="flex items-center gap-4 px-4 py-2.5 border-t border-white/10">
-          <span className="flex items-center gap-1.5 text-slate-500 text-[11px] font-mono">
-            <kbd className="rounded border border-white/15 bg-white/5 px-1.5 font-mono text-[10px] text-slate-400">
+        <div className="flex items-center gap-4 px-4 py-2.5 border-t border-[var(--border)]">
+          <span className="flex items-center gap-1.5 text-[var(--text-muted)] text-[11px] font-mono">
+            <kbd className="rounded border border-[var(--border)] bg-[var(--surface)] px-1.5 font-mono text-[10px] text-[var(--text-3)]">
               ↑
             </kbd>
-            <kbd className="rounded border border-white/15 bg-white/5 px-1.5 font-mono text-[10px] text-slate-400">
+            <kbd className="rounded border border-[var(--border)] bg-[var(--surface)] px-1.5 font-mono text-[10px] text-[var(--text-3)]">
               ↓
             </kbd>
             navigate
           </span>
-          <span className="flex items-center gap-1.5 text-slate-500 text-[11px] font-mono">
-            <kbd className="rounded border border-white/15 bg-white/5 px-1.5 font-mono text-[10px] text-slate-400">
+          <span className="flex items-center gap-1.5 text-[var(--text-muted)] text-[11px] font-mono">
+            <kbd className="rounded border border-[var(--border)] bg-[var(--surface)] px-1.5 font-mono text-[10px] text-[var(--text-3)]">
               ↵
             </kbd>
             select
           </span>
-          <span className="flex items-center gap-1.5 text-slate-500 text-[11px] font-mono">
-            <kbd className="rounded border border-white/15 bg-white/5 px-1.5 font-mono text-[10px] text-slate-400">
+          <span className="flex items-center gap-1.5 text-[var(--text-muted)] text-[11px] font-mono">
+            <kbd className="rounded border border-[var(--border)] bg-[var(--surface)] px-1.5 font-mono text-[10px] text-[var(--text-3)]">
               esc
             </kbd>
             close

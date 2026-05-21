@@ -7,6 +7,7 @@ import { buttonClasses } from "@/components/ui/button";
 import { StatusBar } from "@/components/status-bar";
 import { CommandPalette } from "@/components/command-palette";
 import { VoiceConsole } from "@/components/voice-console";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [session, stats, h] = await Promise.all([auth(), getQueueStats(), headers()]);
@@ -17,9 +18,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
     <div className="flex min-h-full flex-col">
       <StatusBar ip={ip} loginAt={user?.loginAt} urgent={stats.urgent} />
 
-      <header className="sticky top-0 z-10 border-b border-white/10 bg-[#0a0b0f]/80 backdrop-blur">
+      <header className="sticky top-0 z-10 border-b border-[var(--border)] bg-[var(--header-bg)] backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
-          <Link href="/dashboard" className="flex items-center gap-2 font-semibold text-slate-100">
+          <Link href="/dashboard" className="flex items-center gap-2 font-semibold text-[var(--text)]">
             <span className="grid h-7 w-7 place-items-center rounded-lg bg-cyan-500 text-slate-950">
               <ListChecks className="h-4 w-4" />
             </span>
@@ -32,7 +33,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
               <span className="hidden sm:inline">New request</span>
             </Link>
 
-            <span className="hidden items-center gap-2 text-sm text-slate-500 sm:flex">
+            <span className="hidden items-center gap-2 text-sm text-[var(--text-muted)] sm:flex">
               {user?.name ?? user?.email}
               {user?.role === "ADMIN" && (
                 <span className="rounded bg-cyan-500/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-cyan-300">
@@ -40,6 +41,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
                 </span>
               )}
             </span>
+
+            <ThemeToggle />
 
             <form
               action={async () => {

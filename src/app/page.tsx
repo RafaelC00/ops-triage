@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ListChecks, ShieldCheck, Sparkles, Filter, ArrowRight } from "lucide-react";
 import { auth } from "@/auth";
 import { buttonClasses } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const features = [
   {
@@ -33,15 +34,18 @@ export default async function Home() {
   return (
     <main className="flex-1">
       <header className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
-        <div className="flex items-center gap-2 font-semibold text-slate-100">
+        <div className="flex items-center gap-2 font-semibold text-[var(--text)]">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-cyan-500 text-white">
             <ListChecks className="h-5 w-5" />
           </span>
           Ops Triage
         </div>
-        <Link href={signedIn ? "/dashboard" : "/login"} className={buttonClasses("secondary", "sm")}>
-          {signedIn ? "Open dashboard" : "Sign in"}
-        </Link>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Link href={signedIn ? "/dashboard" : "/login"} className={buttonClasses("secondary", "sm")}>
+            {signedIn ? "Open dashboard" : "Sign in"}
+          </Link>
+        </div>
       </header>
 
       <section className="mx-auto max-w-5xl px-6 pb-16 pt-10 sm:pt-16">
@@ -49,10 +53,10 @@ export default async function Home() {
           <span className="inline-flex items-center rounded-full bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-300 ring-1 ring-inset ring-cyan-500/20">
             Internal operations
           </span>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-100 sm:text-5xl">
+          <h1 className="mt-4 text-4xl font-bold tracking-tight text-[var(--text)] sm:text-5xl">
             Triage coworker requests without the chaos.
           </h1>
-          <p className="mt-4 text-lg leading-relaxed text-slate-400">
+          <p className="mt-4 text-lg leading-relaxed text-[var(--text-3)]">
             Ops Triage gives your operations team a single, focused queue to capture incoming
             requests, set priority and status, and always know what to handle next.
           </p>
@@ -71,18 +75,18 @@ export default async function Home() {
 
         <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {features.map((f) => (
-            <div key={f.title} className="rounded-2xl border border-white/10 bg-[#0c0e13] p-5 shadow-sm">
+            <div key={f.title} className="rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-5 shadow-sm">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400">
                 <f.icon className="h-5 w-5" />
               </div>
-              <h3 className="mt-3 font-semibold text-slate-100">{f.title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-slate-400">{f.body}</p>
+              <h3 className="mt-3 font-semibold text-[var(--text)]">{f.title}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-[var(--text-3)]">{f.body}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <footer className="mx-auto max-w-5xl px-6 py-8 text-sm text-slate-400">
+      <footer className="mx-auto max-w-5xl px-6 py-8 text-sm text-[var(--text-3)]">
         Ops Triage — a focused internal tool.
       </footer>
     </main>

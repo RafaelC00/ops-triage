@@ -2,11 +2,11 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export function Label({ className, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {
-  return <label className={cn("block text-sm font-medium text-slate-700 mb-1.5", className)} {...props} />;
+  return <label className={cn("block text-sm font-medium text-[var(--text-faint)] mb-1.5", className)} {...props} />;
 }
 
 const fieldBase =
-  "block w-full rounded-lg border-0 bg-white/5 px-3 py-2 text-sm text-slate-100 ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-cyan-400/60 transition";
+  "block w-full rounded-lg border-0 bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text)] ring-1 ring-inset ring-[var(--border)] placeholder:text-[var(--text-muted)] focus:ring-2 focus:ring-inset focus:ring-cyan-400/60 transition";
 
 export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
   ({ className, ...props }, ref) => <input ref={ref} className={cn(fieldBase, className)} {...props} />,

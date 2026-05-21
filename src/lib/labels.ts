@@ -30,18 +30,18 @@ export const categoryLabel: Record<Category, string> = {
 
 // Tailwind badge styles (dark command-deck theme)
 export const priorityStyles: Record<Priority, string> = {
-  LOW: "bg-white/5 text-slate-400 ring-white/10",
-  MEDIUM: "bg-sky-500/10 text-sky-300 ring-sky-500/20",
-  HIGH: "bg-amber-500/10 text-amber-300 ring-amber-500/20",
-  URGENT: "bg-rose-500/10 text-rose-300 ring-rose-500/20",
+  LOW: "bg-slate-400/10 text-slate-600 dark:text-slate-400 ring-slate-400/20",
+  MEDIUM: "bg-sky-500/10 text-sky-700 dark:text-sky-300 ring-sky-500/20",
+  HIGH: "bg-amber-500/10 text-amber-700 dark:text-amber-300 ring-amber-500/20",
+  URGENT: "bg-rose-500/10 text-rose-700 dark:text-rose-300 ring-rose-500/20",
 };
 
 export const statusStyles: Record<Status, string> = {
-  OPEN: "bg-cyan-500/10 text-cyan-300 ring-cyan-500/20",
-  IN_PROGRESS: "bg-violet-500/10 text-violet-300 ring-violet-500/20",
-  BLOCKED: "bg-rose-500/10 text-rose-300 ring-rose-500/20",
-  RESOLVED: "bg-emerald-500/10 text-emerald-300 ring-emerald-500/20",
-  CLOSED: "bg-white/5 text-slate-500 ring-white/10",
+  OPEN: "bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 ring-cyan-500/20",
+  IN_PROGRESS: "bg-violet-500/10 text-violet-700 dark:text-violet-300 ring-violet-500/20",
+  BLOCKED: "bg-rose-500/10 text-rose-700 dark:text-rose-300 ring-rose-500/20",
+  RESOLVED: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 ring-emerald-500/20",
+  CLOSED: "bg-slate-400/10 text-slate-500 ring-slate-400/20",
 };
 
 // Sort weights so the queue can lead with what matters.

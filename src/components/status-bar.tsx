@@ -24,12 +24,8 @@ export function StatusBar({
   }, []);
 
   useEffect(() => {
-    // Hidden greeting for anyone who opens the console (hi there, reviewer 👋)
     console.log("%c◆ OPS TRIAGE — command deck online", "color:#22d3ee;font-weight:bold;font-size:12px");
-    console.log(
-      "%cHey Holden 👋 — this whole deck was built in one evening, AI-native end to end. Hope the queue's clear. — Rafael",
-      "color:#818cf8",
-    );
+    console.log("%cInternal operations console · all systems operational", "color:#818cf8");
   }, []);
 
   const lastLogin = loginAt
@@ -38,7 +34,7 @@ export function StatusBar({
   const critical = urgent > 0;
 
   return (
-    <div className="border-b border-white/10 bg-black/40 font-mono text-[11px] text-slate-500">
+    <div className="border-b border-[var(--border)] bg-[var(--surface)] font-mono text-[11px] text-[var(--text-muted)]">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-1 px-6 py-1.5">
         <span className="flex items-center gap-1.5">
           <span
@@ -48,7 +44,7 @@ export function StatusBar({
         </span>
 
         {critical && (
-          <span className="flex items-center gap-1 text-amber-300">
+          <span className="flex items-center gap-1 text-amber-700 dark:text-amber-300">
             <AlertTriangle className="h-3 w-3" /> {urgent} URGENT UNRESOLVED
           </span>
         )}
@@ -59,15 +55,15 @@ export function StatusBar({
         <span className="hidden items-center gap-1 md:flex">
           <Clock3 className="h-3 w-3" /> last login {lastLogin}
         </span>
-        <span className="flex items-center gap-1 text-slate-400">
+        <span className="flex items-center gap-1 text-[var(--text-3)]">
           <Activity className="h-3 w-3 text-cyan-400" /> {now}
         </span>
-        <span className="hidden items-center gap-0.5 text-slate-600 lg:flex">
+        <span className="hidden items-center gap-0.5 text-[var(--text-faint)] lg:flex">
           <Command className="h-3 w-3" />K
         </span>
         <button
           onClick={() => setEgg((v) => !v)}
-          className="text-slate-700 transition-colors hover:text-cyan-400"
+          className="text-[var(--text-faint)] transition-colors hover:text-cyan-400"
           aria-label="System diagnostics"
           title="◆"
         >
@@ -77,8 +73,7 @@ export function StatusBar({
 
       {egg && (
         <div className="mx-auto max-w-6xl px-6 pb-1.5 text-[11px] text-cyan-300/80">
-          ↳ hey Holden — this whole deck was built in one evening, AI-native end to end. the queue&apos;s
-          yours. — Rafael
+          ↳ Ops Triage · internal operations console · keeping the queue clear, one request at a time.
         </div>
       )}
     </div>

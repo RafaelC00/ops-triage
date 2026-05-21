@@ -43,15 +43,15 @@ export default async function RequestDetailPage({ params }: { params: Promise<{ 
 
   return (
     <div className="space-y-6">
-      <Link href="/dashboard" className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-300">
+      <Link href="/dashboard" className="inline-flex items-center gap-1 text-sm text-[var(--text-muted)] hover:text-[var(--text-2)]">
         <ArrowLeft className="h-4 w-4" />
         Back to queue
       </Link>
 
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold text-slate-100">{request.title}</h1>
-          <p className="mt-1 text-sm text-slate-500">
+          <h1 className="text-xl font-semibold text-[var(--text)]">{request.title}</h1>
+          <p className="mt-1 text-sm text-[var(--text-muted)]">
             Raised by {request.requester} · opened {formatDateTime(request.createdAt)}
           </p>
         </div>
@@ -65,23 +65,23 @@ export default async function RequestDetailPage({ params }: { params: Promise<{ 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Main column */}
         <div className="space-y-6 lg:col-span-2">
-          <section className="rounded-2xl border border-white/10 bg-[#0c0e13] p-5 shadow-sm">
-            <h2 className="text-sm font-semibold text-slate-100">Description</h2>
-            <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-slate-400">
+          <section className="rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-5 shadow-sm">
+            <h2 className="text-sm font-semibold text-[var(--text)]">Description</h2>
+            <p className="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-[var(--text-3)]">
               {request.description || "No description provided."}
             </p>
           </section>
 
-          <section className="rounded-2xl border border-white/10 bg-[#0c0e13] p-5 shadow-sm">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-100">
-              <MessageSquare className="h-4 w-4 text-slate-400" /> Notes
+          <section className="rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-5 shadow-sm">
+            <h2 className="flex items-center gap-2 text-sm font-semibold text-[var(--text)]">
+              <MessageSquare className="h-4 w-4 text-[var(--text-3)]" /> Notes
             </h2>
             <div className="mt-3 space-y-3">
-              {request.notes.length === 0 && <p className="text-sm text-slate-400">No notes yet.</p>}
+              {request.notes.length === 0 && <p className="text-sm text-[var(--text-3)]">No notes yet.</p>}
               {request.notes.map((n) => (
-                <div key={n.id} className="rounded-lg bg-white/5 p-3">
-                  <p className="text-sm text-slate-300">{n.body}</p>
-                  <p className="mt-1 text-xs text-slate-400">
+                <div key={n.id} className="rounded-lg bg-[var(--surface)] p-3">
+                  <p className="text-sm text-[var(--text-2)]">{n.body}</p>
+                  <p className="mt-1 text-xs text-[var(--text-3)]">
                     {n.author.name ?? n.author.email} · {relativeTime(n.createdAt)}
                   </p>
                 </div>
@@ -95,8 +95,8 @@ export default async function RequestDetailPage({ params }: { params: Promise<{ 
 
         {/* Side column: controls + history */}
         <div className="space-y-6">
-          <section className="rounded-2xl border border-white/10 bg-[#0c0e13] p-5 shadow-sm">
-            <h2 className="text-sm font-semibold text-slate-100">Triage</h2>
+          <section className="rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-5 shadow-sm">
+            <h2 className="text-sm font-semibold text-[var(--text)]">Triage</h2>
             <div className="mt-3 space-y-4">
               <div>
                 <Label htmlFor="status-select">Status</Label>
@@ -131,17 +131,17 @@ export default async function RequestDetailPage({ params }: { params: Promise<{ 
             </div>
           </section>
 
-          <section className="rounded-2xl border border-white/10 bg-[#0c0e13] p-5 shadow-sm">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-100">
-              <Clock className="h-4 w-4 text-slate-400" /> History
+          <section className="rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-5 shadow-sm">
+            <h2 className="flex items-center gap-2 text-sm font-semibold text-[var(--text)]">
+              <Clock className="h-4 w-4 text-[var(--text-3)]" /> History
             </h2>
             <ol className="mt-3 space-y-3">
               {request.events.map((e) => (
                 <li key={e.id} className="flex gap-3">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-300" />
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--text-3)]" />
                   <div>
-                    <p className="text-sm text-slate-300">{e.message}</p>
-                    <p className="text-xs text-slate-400">
+                    <p className="text-sm text-[var(--text-2)]">{e.message}</p>
+                    <p className="text-xs text-[var(--text-3)]">
                       {e.actor.name ?? e.actor.email} · {relativeTime(e.createdAt)}
                     </p>
                   </div>
@@ -152,7 +152,7 @@ export default async function RequestDetailPage({ params }: { params: Promise<{ 
 
           {isAdmin && (
             <section className="rounded-2xl border border-rose-500/20 bg-rose-500/5 p-5">
-              <h2 className="text-sm font-semibold text-rose-300">Admin</h2>
+              <h2 className="text-sm font-semibold text-rose-700 dark:text-rose-300">Admin</h2>
               <p className="mt-1 text-xs text-rose-400/80">Permanently delete this request.</p>
               <div className="mt-3">
                 <DeleteRequestButton action={remove} />

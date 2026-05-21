@@ -457,18 +457,18 @@ export function VoiceConsole() {
         {/* Panel */}
         {panelOpen && (
           <div
-            className="w-[320px] rounded-2xl border border-white/10 bg-[#0c0e13] shadow-[0_0_40px_rgba(0,0,0,0.7),0_0_24px_rgba(34,211,238,0.1)] overflow-hidden"
+            className="w-[320px] rounded-2xl border border-[var(--border)] bg-[var(--panel)] shadow-[0_0_40px_rgba(0,0,0,0.7),0_0_24px_rgba(34,211,238,0.1)] overflow-hidden"
             role="dialog"
             aria-label="Voice command console"
           >
             {/* Panel header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-              <span className="font-mono text-xs text-slate-400 tracking-widest uppercase">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border)]">
+              <span className="font-mono text-xs text-[var(--text-3)] tracking-widest uppercase">
                 Voice Console
               </span>
               <button
                 onClick={closePanel}
-                className="text-slate-500 hover:text-slate-300 transition-colors rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-[#22d3ee]"
+                className="text-[var(--text-muted)] hover:text-[var(--text-2)] transition-colors rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-[#22d3ee]"
                 aria-label="Close voice console"
               >
                 <X size={14} />
@@ -478,7 +478,7 @@ export function VoiceConsole() {
             {unavailable ? (
               /* Unavailable state */
               <div className="px-4 py-6">
-                <p className="font-mono text-sm text-slate-500 leading-relaxed">
+                <p className="font-mono text-sm text-[var(--text-muted)] leading-relaxed">
                   Voice mode needs a Chromium-based browser with microphone
                   access (Chrome, Edge, Arc). Safari and Firefox are not
                   supported.
@@ -487,7 +487,7 @@ export function VoiceConsole() {
             ) : (
               <>
                 {/* Canvas spectrum */}
-                <div className="flex items-center justify-center py-4 bg-[#080a0f]">
+                <div className="flex items-center justify-center py-4 bg-[var(--bg)]">
                   <canvas
                     ref={canvasRef}
                     width={CANVAS_SIZE}
@@ -498,14 +498,14 @@ export function VoiceConsole() {
                 </div>
 
                 {/* Interim transcript */}
-                <div className="min-h-[36px] px-4 py-2 border-t border-white/10">
+                <div className="min-h-[36px] px-4 py-2 border-t border-[var(--border)]">
                   {interim ? (
                     <p className="font-mono text-sm text-[#22d3ee] truncate">
-                      <span className="text-slate-500 mr-1">›</span>
+                      <span className="text-[var(--text-muted)] mr-1">›</span>
                       {interim}
                     </p>
                   ) : (
-                    <p className="font-mono text-sm text-slate-600">
+                    <p className="font-mono text-sm text-[var(--text-faint)]">
                       {listening ? "Listening…" : "Press Start to speak"}
                     </p>
                   )}
@@ -522,11 +522,11 @@ export function VoiceConsole() {
 
                 {/* Help command list */}
                 {showHelp && (
-                  <ul className="mx-4 mb-3 rounded-xl border border-white/10 bg-white/[0.03] divide-y divide-white/5">
+                  <ul className="mx-4 mb-3 rounded-xl border border-[var(--border)] bg-[var(--surface)] divide-y divide-[var(--border)]">
                     {HELP_COMMANDS.map((cmd) => (
                       <li
                         key={cmd}
-                        className="px-3 py-1.5 font-mono text-[11px] text-slate-400"
+                        className="px-3 py-1.5 font-mono text-[11px] text-[var(--text-3)]"
                       >
                         {cmd}
                       </li>
@@ -541,7 +541,7 @@ export function VoiceConsole() {
                     className={`w-full rounded-xl py-2.5 font-mono text-sm font-medium transition-all duration-200 border focus:outline-none focus-visible:ring-2 focus-visible:ring-[#22d3ee] ${
                       listening
                         ? "border-[#22d3ee]/30 bg-[#22d3ee]/10 text-[#22d3ee] hover:bg-[#22d3ee]/15 shadow-[0_0_16px_rgba(34,211,238,0.15)]"
-                        : "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10"
+                        : "border-[var(--border)] bg-[var(--surface)] text-[var(--text-2)] hover:bg-[var(--surface-hover)]"
                     }`}
                   >
                     {listening ? (
@@ -568,8 +568,8 @@ export function VoiceConsole() {
           aria-label={panelOpen ? "Close voice console" : "Open voice console"}
           className={`flex items-center justify-center w-14 h-14 rounded-full border transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#22d3ee] ${
             panelOpen || listening
-              ? "border-[#22d3ee]/50 bg-[#0c0e13] text-[#22d3ee] shadow-[0_0_24px_rgba(34,211,238,0.28)]"
-              : "border-white/10 bg-[#0c0e13] text-slate-400 hover:text-[#22d3ee] hover:border-[#22d3ee]/30 hover:shadow-[0_0_16px_rgba(34,211,238,0.15)]"
+              ? "border-[#22d3ee]/50 bg-[var(--panel)] text-[#22d3ee] shadow-[0_0_24px_rgba(34,211,238,0.28)]"
+              : "border-[var(--border)] bg-[var(--panel)] text-[var(--text-3)] hover:text-[#22d3ee] hover:border-[#22d3ee]/30 hover:shadow-[0_0_16px_rgba(34,211,238,0.15)]"
           }`}
         >
           {listening ? <Mic size={22} className="animate-pulse" /> : <Mic size={22} />}
