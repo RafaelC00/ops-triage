@@ -2,6 +2,8 @@
 
 A small, authenticated internal tool for managing operations requests. Ops team members log in, submit requests on behalf of coworkers, and work through a prioritized queue — updating status, assigning owners, adding notes, and letting the built-in triage helper suggest a priority and category. The app ships with a deterministic rules engine (zero-cost, works offline) and an optional LLM-backed triage mode toggled by an environment flag.
 
+![Ops Triage dashboard — queue health, stats, and the prioritized request queue](docs/preview.png)
+
 ---
 
 ## Live Demo
