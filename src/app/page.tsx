@@ -33,8 +33,8 @@ export default async function Home() {
   return (
     <main className="flex-1">
       <header className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
-        <div className="flex items-center gap-2 font-semibold text-slate-900">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-indigo-600 text-white">
+        <div className="flex items-center gap-2 font-semibold text-slate-100">
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-cyan-500 text-white">
             <ListChecks className="h-5 w-5" />
           </span>
           Ops Triage
@@ -46,13 +46,13 @@ export default async function Home() {
 
       <section className="mx-auto max-w-5xl px-6 pb-16 pt-10 sm:pt-16">
         <div className="max-w-2xl">
-          <span className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-200">
+          <span className="inline-flex items-center rounded-full bg-cyan-500/10 px-3 py-1 text-xs font-medium text-cyan-300 ring-1 ring-inset ring-cyan-500/20">
             Internal operations
           </span>
-          <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+          <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-100 sm:text-5xl">
             Triage coworker requests without the chaos.
           </h1>
-          <p className="mt-4 text-lg leading-relaxed text-slate-600">
+          <p className="mt-4 text-lg leading-relaxed text-slate-400">
             Ops Triage gives your operations team a single, focused queue to capture incoming
             requests, set priority and status, and always know what to handle next.
           </p>
@@ -71,12 +71,12 @@ export default async function Home() {
 
         <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {features.map((f) => (
-            <div key={f.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
+            <div key={f.title} className="rounded-2xl border border-white/10 bg-[#0c0e13] p-5 shadow-sm">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400">
                 <f.icon className="h-5 w-5" />
               </div>
-              <h3 className="mt-3 font-semibold text-slate-900">{f.title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-slate-600">{f.body}</p>
+              <h3 className="mt-3 font-semibold text-slate-100">{f.title}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-slate-400">{f.body}</p>
             </div>
           ))}
         </div>

@@ -17,5 +17,5 @@ export function StatusBadge({ value }: { value: Status }) {
 }
 
 export function CategoryBadge({ value }: { value: Category }) {
-  return <Badge className="bg-slate-50 text-slate-600 ring-slate-200">{categoryLabel[value]}</Badge>;
+  return <Badge className="bg-white/5 text-slate-400 ring-white/10">{categoryLabel[value]}</Badge>;
 }

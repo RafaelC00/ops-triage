@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 function ErrorNote({ message }: { message?: string }) {
   if (!message) return null;
   return (
-    <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700 ring-1 ring-inset ring-rose-200">
+    <p className="rounded-lg bg-rose-500/10 px-3 py-2 text-sm text-rose-300 ring-1 ring-inset ring-rose-500/20">
       {message}
     </p>
   );
@@ -33,7 +33,7 @@ export function LoginForm() {
       </Button>
       <p className="text-center text-sm text-slate-500">
         No account?{" "}
-        <Link href="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
+        <Link href="/register" className="font-medium text-cyan-400 hover:text-cyan-400">
           Create one
         </Link>
       </p>
@@ -63,7 +63,7 @@ export function RegisterForm() {
       </Button>
       <p className="text-center text-sm text-slate-500">
         Already have an account?{" "}
-        <Link href="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+        <Link href="/login" className="font-medium text-cyan-400 hover:text-cyan-400">
           Sign in
         </Link>
       </p>

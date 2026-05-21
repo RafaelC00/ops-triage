@@ -62,11 +62,11 @@ export function NewRequestForm() {
         <Textarea id="description" name="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="What's needed and any context…" />
       </div>
 
-      <div className="rounded-lg border border-dashed border-indigo-200 bg-indigo-50/50 p-3">
+      <div className="rounded-lg border border-dashed border-cyan-500/20 bg-cyan-500/5 p-3">
         <div className="flex items-center justify-between gap-3">
-          <p className="text-sm text-slate-600">Not sure how to triage it?</p>
+          <p className="text-sm text-slate-400">Not sure how to triage it?</p>
           <Button type="button" variant="secondary" size="sm" onClick={suggest} disabled={triaging}>
-            <Sparkles className="h-4 w-4 text-indigo-600" />
+            <Sparkles className="h-4 w-4 text-cyan-400" />
             {triaging ? "Thinking…" : "Suggest triage"}
           </Button>
         </div>
@@ -93,7 +93,7 @@ export function NewRequestForm() {
       </div>
 
       {state.error && (
-        <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700 ring-1 ring-inset ring-rose-200">{state.error}</p>
+        <p className="rounded-lg bg-rose-500/10 px-3 py-2 text-sm text-rose-300 ring-1 ring-inset ring-rose-500/20">{state.error}</p>
       )}
 
       <div className="flex justify-end gap-3">

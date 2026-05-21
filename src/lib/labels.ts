@@ -28,20 +28,20 @@ export const categoryLabel: Record<Category, string> = {
   OTHER: "Other",
 };
 
-// Tailwind badge styles
+// Tailwind badge styles (dark command-deck theme)
 export const priorityStyles: Record<Priority, string> = {
-  LOW: "bg-slate-100 text-slate-600 ring-slate-200",
-  MEDIUM: "bg-sky-50 text-sky-700 ring-sky-200",
-  HIGH: "bg-amber-50 text-amber-700 ring-amber-200",
-  URGENT: "bg-rose-50 text-rose-700 ring-rose-200",
+  LOW: "bg-white/5 text-slate-400 ring-white/10",
+  MEDIUM: "bg-sky-500/10 text-sky-300 ring-sky-500/20",
+  HIGH: "bg-amber-500/10 text-amber-300 ring-amber-500/20",
+  URGENT: "bg-rose-500/10 text-rose-300 ring-rose-500/20",
 };
 
 export const statusStyles: Record<Status, string> = {
-  OPEN: "bg-indigo-50 text-indigo-700 ring-indigo-200",
-  IN_PROGRESS: "bg-blue-50 text-blue-700 ring-blue-200",
-  BLOCKED: "bg-rose-50 text-rose-700 ring-rose-200",
-  RESOLVED: "bg-emerald-50 text-emerald-700 ring-emerald-200",
-  CLOSED: "bg-slate-100 text-slate-500 ring-slate-200",
+  OPEN: "bg-cyan-500/10 text-cyan-300 ring-cyan-500/20",
+  IN_PROGRESS: "bg-violet-500/10 text-violet-300 ring-violet-500/20",
+  BLOCKED: "bg-rose-500/10 text-rose-300 ring-rose-500/20",
+  RESOLVED: "bg-emerald-500/10 text-emerald-300 ring-emerald-500/20",
+  CLOSED: "bg-white/5 text-slate-500 ring-white/10",
 };
 
 // Sort weights so the queue can lead with what matters.

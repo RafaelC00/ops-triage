@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  --background: #0a0b0f;
+  --foreground: #e2e8f0;
+  --panel: #0c0e13;
+  --border: rgba(255, 255, 255, 0.08);
+  --accent: #22d3ee;
+  --accent-2: #818cf8;
 }
 
 @theme inline {
@@ -12,13 +16,56 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html {
+  color-scheme: dark;
+}
+
 html,
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
 }
 
+/* Command-deck canvas: faint grid + corner glows. */
 body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(55rem 55rem at 85% -15%, rgba(34, 211, 238, 0.07), transparent 60%),
+    radial-gradient(50rem 50rem at -5% 0%, rgba(129, 140, 248, 0.06), transparent 55%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 46px 46px, 46px 46px;
+  background-attachment: fixed;
+}
+
+/* Brand scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 211, 238, 0.35) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(180deg, rgba(34, 211, 238, 0.5), rgba(129, 140, 248, 0.5));
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.25);
+  color: #fff;
+}
+
+/* Reusable surface */
+.panel {
+  background-color: var(--panel);
+  border: 1px solid var(--border);
 }
