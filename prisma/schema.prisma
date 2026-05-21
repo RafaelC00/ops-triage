@@ -1,0 +1,107 @@
+// Prisma schema — Ops Triage
+// Neon Postgres. Pooled URL (DATABASE_URL) for runtime, direct URL (DIRECT_URL) for migrations.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum Status {
+  OPEN
+  IN_PROGRESS
+  BLOCKED
+  RESOLVED
+  CLOSED
+}
+
+enum Category {
+  IT
+  FACILITIES
+  HR
+  FINANCE
+  LOGISTICS
+  OTHER
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String // bcrypt hash
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+
+  createdRequests Request[] @relation("createdBy")
+  ownedRequests   Request[] @relation("owner")
+  notes           Note[]
+  events          Event[]
+}
+
+model Request {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @default("")
+  requester   String // name of the coworker who raised the request
+  category    Category @default(OTHER)
+  priority    Priority @default(MEDIUM)
+  status      Status   @default(OPEN)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  createdBy   User   @relation("createdBy", fields: [createdById], references: [id])
+  createdById String
+
+  owner   User?   @relation("owner", fields: [ownerId], references: [id])
+  ownerId String?
+
+  notes  Note[]
+  events Event[]
+
+  @@index([status])
+  @@index([priority])
+  @@index([category])
+  @@index([createdAt])
+}
+
+model Note {
+  id        String   @id @default(cuid())
+  body      String
+  createdAt DateTime @default(now())
+
+  request   Request @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  requestId String
+
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+}
+
+// Append-only audit trail shown as request "history".
+model Event {
+  id        String   @id @default(cuid())
+  type      String // created | status_changed | priority_changed | owner_changed | note_added
+  message   String // human-readable summary
+  createdAt DateTime @default(now())
+
+  request   Request @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  requestId String
+
+  actor   User   @relation(fields: [actorId], references: [id])
+  actorId String
+}
