@@ -155,6 +155,18 @@ pnpm exec tsx prisma/seed.ts
 
 ---
 
+## Security
+
+- **Dependency audit:** `pnpm audit` is clean (the one transitive PostCSS advisory is patched via a `pnpm.overrides` pin to `>=8.5.10`).
+- **Security headers** (in `next.config.ts`, applied to every route): HSTS, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, and a locked-down `Permissions-Policy`.
+- **No secrets in the repo** — verified the DB password appears in zero tracked files/history; only `.env.example` (placeholders) is committed.
+- **Auth verified end-to-end** (not just asserted):
+  - signed-out `GET /dashboard` → **307 → /login**; signed-out `POST /api/triage` → **401**
+  - bad credentials → error state, stays on `/login`; session persists across refresh
+  - RBAC: a USER sees no Delete action; an ADMIN does
+- **Triage rules engine** has unit tests (`pnpm test`, 8 passing).
+- **Known gaps** (would add next): rate-limiting on the auth endpoints (brute-force protection) and a strict Content-Security-Policy.
+
 ## What I'd Improve With More Time
 
 - **Tests** — unit tests for the triage rules engine, integration tests for server actions with a test database, and end-to-end tests with Playwright.
