@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Inbox, Loader2, AlertTriangle, UserX, ArrowRight } from "lucide-react";
 import { getRequests, getQueueStats } from "@/lib/data";
+import { HealthSummary } from "@/components/health-summary";
 import { Filters } from "@/components/filters";
 import { PriorityBadge, StatusBadge, CategoryBadge } from "@/components/badges";
 import { formatDate } from "@/lib/utils";
@@ -32,6 +33,8 @@ export default async function DashboardPage({ searchParams }: { searchParams: Se
         <h1 className="text-xl font-semibold text-slate-100">Request queue</h1>
         <p className="mt-1 text-sm text-slate-500">Triage incoming operations requests by priority.</p>
       </div>
+
+      <HealthSummary open={stats.open} inProgress={stats.inProgress} urgent={stats.urgent} unassigned={stats.unassigned} />
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {statCards.map((s) => (
