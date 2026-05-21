@@ -57,17 +57,22 @@ outsource the decisions.
 - **Commit history** is intentionally chunked by concern (data model + auth → server actions /
   data / triage → UI → command-deck features → health hero) rather than one giant commit.
 
-## Fleet usage (token transparency)
+## Multi-agent orchestration & token ledger
 
-Measured where the platform reports it; the orchestrator figure is an estimate (Claude Code does
-not expose an exact per-task counter).
+This was built with a small fleet of models, each given work suited to its strengths and cost.
+Measured tokens are reported where the platform exposes them; the orchestrator figure is an
+estimate (Claude Code does not expose an exact per-task counter).
 
-| Agent | Model | Role | Tokens |
+| Agent | Model | Task | Tokens |
 |---|---|---|---|
-| Orchestrator | Claude Opus 4.7 | Architecture, backend, auth, theme, deploy, QA | ~ (primary; estimated few-hundred-K, cache-heavy) |
-| Sub-agent A | Claude Sonnet | README + `.env.example` | 54,167 (measured) |
-| Sub-agent B | Claude Sonnet | Voice console + ⌘K palette | 51,120 (measured) |
+| **Susan** (orchestrator) | Claude Opus 4.7 | Architecture, data model, auth, server actions, theming, deploy, QA, integration | primary — estimated several-hundred-K, cache-heavy |
+| Sub-agent A | Claude Sonnet | README + `.env.example` | 54,167 |
+| Sub-agent B | Claude Sonnet | Voice console + ⌘K command palette | 51,120 |
+| **Vibe** | Mistral devstral-medium | `ARCHITECTURE.md` (711) + triage unit tests (670) | ~1,381 |
+| **Cipher** | Cursor Agent | Attempted the triage tests — Cursor free-tier quota exhausted → fell back to Vibe | n/a |
+| **HERMES** | Claude Sonnet (OpenRouter) | Recruiter ETA + submission drafts | ~2,000 |
 
-Delegating the docs and the two self-contained components to cheaper Sonnet sub-agents kept the
-expensive orchestrator focused on architecture and the security-sensitive auth path — the same
-cost/judgment trade-off I'd make on a real team.
+The routing principle: keep the expensive orchestrator on architecture and the security-sensitive
+auth path; push self-contained, well-specified work (docs, the two command-deck components, the
+test file) to cheaper models. When Cipher hit a hard quota wall mid-task, the work rerouted to Vibe
+without losing momentum — the kind of graceful fallback a real team needs.
