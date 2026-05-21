@@ -60,7 +60,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
       {/* Global command-deck features */}
       <CommandPalette />
-      <VoiceConsole />
+      {/* Voice console is gated to staging while the speech-recognition UX is refined. */}
+      {process.env.NEXT_PUBLIC_ENABLE_VOICE === "true" && <VoiceConsole />}
     </div>
   );
 }
