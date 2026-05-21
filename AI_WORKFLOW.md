@@ -94,6 +94,14 @@ Everything above was orchestrated and shipped within the trial's ~2-hour timebox
 - **Multi-model agent CLIs** — Cursor Agent (Cipher), Mistral Vibe, and OpenRouter (HERMES) for delegated, cost-appropriate work.
 - **Platform tooling** — Vercel CLI (deploy, environment variables, Neon storage), GitHub CLI, Prisma, and Vitest.
 
+### Superpowers — the skill the brief suggested
+
+The brief recommended installing the **Superpowers** skill and asking the AI to use it. Here's the honest status:
+
+- **Installed** from Anthropic's official plugin marketplace (`superpowers@claude-plugins-official`, v5.1.0), and **security-audited by SHIELD** before trusting it — low risk: official source, MIT, **0 MCP servers**, and its lone SessionStart hook only injects a local markdown file as context (no network, no exec, no secret access).
+- It ships **14 skills**: `brainstorming`, `writing-plans`, `executing-plans`, `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `requesting-code-review`, `receiving-code-review`, `subagent-driven-development`, `dispatching-parallel-agents`, `using-git-worktrees`, `finishing-a-development-branch`, `using-superpowers`, `writing-skills`.
+- **Did we use it?** Transparently: Superpowers auto-activates through a SessionStart hook that loads on the next Claude Code restart, so its live auto-triggering skills were **not invoked mid-session** during this build. But the build already practiced the disciplines it formalizes — **verification-before-completion** (build + unit tests + end-to-end auth verification via curl/Playwright before declaring done), **subagent-driven development** (bounded work delegated to Sonnet/Mistral with review), and **systematic debugging** (the Prisma 7→6 pivot, catching a bad bulk-edit before it shipped). It's installed and audited, so it fires automatically from here on.
+
 **Token totals:** delegated/measured work ≈ **108.7K tokens** across the cheaper models (≈ <$1); the Opus orchestrator was the dominant spend (Claude Code does not expose an exact counter).
 
 **Shipped in the window:** a deployed, authenticated app (production + staging), Neon Postgres with seed data and an audit-history trail, server-side route *and* action protection, light/dark theming, Suspense streaming with skeletons, an ⌘K command palette, **8 passing unit tests**, and complete docs — across **12 chunked commits**.
