@@ -76,3 +76,24 @@ The routing principle: keep the expensive orchestrator on architecture and the s
 auth path; push self-contained, well-specified work (docs, the two command-deck components, the
 test file) to cheaper models. When Cipher hit a hard quota wall mid-task, the work rerouted to Vibe
 without losing momentum — the kind of graceful fallback a real team needs.
+
+## Final fleet summary — the ~2-hour build
+
+Everything above was orchestrated and shipped within the trial's ~2-hour timebox.
+
+**Fleet (agent · model · contribution):**
+- **Susan** — Claude Opus 4.7 (orchestrator): architecture, data model, auth, server actions, theming, deploy, QA, integration.
+- **Sub-agent A** — Claude Sonnet: `README.md` + `.env.example` (54,167 tokens).
+- **Sub-agent B** — Claude Sonnet: voice console + ⌘K command palette (51,120 tokens).
+- **Vibe** — Mistral devstral-medium: `ARCHITECTURE.md` + triage unit tests (~1,381 tokens).
+- **HERMES** — Claude Sonnet via OpenRouter: recruiter/communication drafts (~2,000 tokens).
+- **Cipher** — Cursor Agent: dispatched for the tests; hit a free-tier quota wall → work rerouted to Vibe.
+
+**Specialized skills, MCPs & tooling:**
+- **Playwright MCP** — browser automation used to *provision the Neon Postgres database through the Vercel dashboard*, run end-to-end QA on the live deployment (auth, queue, ⌘K palette, theme toggle), and inspect the database via the Vercel Data Editor.
+- **Multi-model agent CLIs** — Cursor Agent (Cipher), Mistral Vibe, and OpenRouter (HERMES) for delegated, cost-appropriate work.
+- **Platform tooling** — Vercel CLI (deploy, environment variables, Neon storage), GitHub CLI, Prisma, and Vitest.
+
+**Token totals:** delegated/measured work ≈ **108.7K tokens** across the cheaper models (≈ <$1); the Opus orchestrator was the dominant spend (Claude Code does not expose an exact counter).
+
+**Shipped in the window:** a deployed, authenticated app (production + staging), Neon Postgres with seed data and an audit-history trail, server-side route *and* action protection, light/dark theming, Suspense streaming with skeletons, an ⌘K command palette, **8 passing unit tests**, and complete docs — across **12 chunked commits**.
